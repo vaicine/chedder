@@ -243,7 +243,7 @@ def f_time(self, origin, match, args):
          timenow = time.gmtime(time.time() + (t * 3600))
          msg = time.strftime("%a, %d %b %Y %H:%M:%S " + str(tz), timenow)
          self.msg(origin.sender, msg)
-f_time.commands = ['t']
+f_time.commands = ['t', 'time']
 f_time.name = 't'
 f_time.example = '.t UTC'
 
@@ -280,7 +280,6 @@ tock.priority = 'high'
 
 def npl(phenny, input): 
    """Shows the time from NPL's SNTP server."""
-   # for server in ('ntp1.npl.co.uk', 'ntp2.npl.co.uk'): 
    client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
    client.sendto('\x1b' + 47 * '\0', ('ntp1.npl.co.uk', 123))
    data, address = client.recvfrom(1024)

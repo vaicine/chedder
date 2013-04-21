@@ -30,7 +30,7 @@ class Watcher(object):
 def run_phenny(config): 
    if hasattr(config, 'delay'): 
       delay = config.delay
-   else: delay = 20
+   else: delay = 1
 
    def connect(config): 
       p = bot.Phenny(config)

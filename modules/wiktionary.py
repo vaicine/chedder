@@ -89,7 +89,7 @@ def w(phenny, input):
    if len(result) > 300: 
       result = result[:295] + '[...]'
    phenny.say(result)
-w.commands = ['w']
+w.commands = ['w', 'define']
 w.example = '.w bailiwick'
 
 def encarta(phenny, input): 

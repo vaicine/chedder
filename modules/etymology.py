@@ -7,24 +7,16 @@ Licensed under the Eiffel Forum License 2.
 http://inamidst.com/phenny/
 """
 
-import re, urllib
+import re
 import web
 from tools import deprecated
 
-etysite = 'http://www.etymonline.com/index.php?'
-etyuri = etysite + 'allowed_in_frame=0&term=%s'
-etysearch = etysite + 'allowed_in_frame=0&search=%s'
+etyuri = 'http://etymonline.com/?term=%s'
+etysearch = 'http://etymonline.com/?search=%s'
 
 r_definition = re.compile(r'(?ims)<dd[^>]*>.*?</dd>')
 r_tag = re.compile(r'<(?!!)[^>]+>')
 r_whitespace = re.compile(r'[\t\r\n ]+')
-
-class Grab(urllib.URLopener): 
-   def __init__(self, *args): 
-      self.version = 'Mozilla/5.0 (Phenny)'
-      urllib.URLopener.__init__(self, *args)
-   def http_error_default(self, url, fp, errcode, errmsg, headers): 
-      return urllib.addinfourl(fp, [headers, errcode], "http:" + url)
 
 abbrs = [
    'cf', 'lit', 'etc', 'Ger', 'Du', 'Skt', 'Rus', 'Eng', 'Amer.Eng', 'Sp', 
@@ -54,11 +46,7 @@ def etymology(word):
       raise ValueError("Word too long: %s[...]" % word[:10])
    word = {'axe': 'ax/axe'}.get(word, word)
 
-   grab = urllib._urlopener
-   urllib._urlopener = Grab()
-   urllib._urlopener.addheader("Referer", "http://www.etymonline.com/")
    bytes = web.get(etyuri % web.urllib.quote(word))
-   urllib._urlopener = grab
    definitions = r_definition.findall(bytes)
 
    if not definitions: 
@@ -70,11 +58,10 @@ def etymology(word):
       return None
    sentence = m.group(0)
 
-   # try: 
-   #    sentence = unicode(sentence, 'iso-8859-1')
-   #    sentence = sentence.encode('utf-8')
-   # except: pass
-   sentence = web.decode(sentence)
+   try: 
+      sentence = unicode(sentence, 'iso-8859-1')
+      sentence = sentence.encode('utf-8')
+   except: pass
 
    maxlength = 275
    if len(sentence) > maxlength: 
@@ -84,7 +71,7 @@ def etymology(word):
       sentence = ' '.join(words) + ' [...]'
 
    sentence = '"' + sentence.replace('"', "'") + '"'
-   return sentence + ' - ' + ('http://etymonline.com/index.php?term=%s' % web.urllib.quote(word))
+   return sentence + ' - ' + (etyuri % word)
 
 @deprecated
 def f_etymology(self, origin, match, args): 
@@ -102,7 +89,7 @@ def f_etymology(self, origin, match, args):
       self.msg(origin.sender, result)
    else: 
       uri = etysearch % word
-      msg = 'Can\'t find the etymology for "%s". Try %s' % (word, ('http://etymonline.com/index.php?term=%s' % web.urllib.quote(word)))
+      msg = 'Can\'t find the etymology for "%s". Try %s' % (word, uri)
       self.msg(origin.sender, msg)
 # @@ Cf. http://swhack.com/logs/2006-01-04#T01-50-22
 f_etymology.rule = (['ety'], r"(.+?)$")

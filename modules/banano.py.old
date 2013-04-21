@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+"""
+banano.py - banano script
+
+"""
+
+import random
+import re
+
+responses = [
+  'Fluttershy is best pony',
+  'Everypony loves Banano',
+  'TwilightSparkle: Aren\'t you a little old for this? PinkiePie: Too old for free candy? NEVER!',
+  'I\'m putting my hoof down. Everyponys gotta respect that.',
+  'I simply cannot let such a crime against fabulosity go uncorrected.',
+  'Look upon me Equestria, for I am Rarity!',
+  'Fine, I\'m guilty! I wear false eyelashes! Oh, and I took a bite of the cake.',
+  'All the ponies in this town are crazy!',
+  'Hey Twilight, what\'s soaking wet and clueless? Your face!',
+  'Nopony pushes new Fluttershy around! NOPONY!!!!',
+  'There is nothing fun about Dragons, Scary: yes, Fun: NO!',
+  'Nopony breaks a Pinkie promise!',
+  'Oh my gosh. Hold on to your hooves – I am just about to be brilliant!',
+  'Never fear, your friendly neighborhood Rainbow Dash is here!',
+  'You know, ponies only have four legs.'
+]
+
+
+def ringringbanano(phenny, input):
+  phenny.say(random.choice(responses))
+ringringbanano.commands = ['banano']
+
+if __name__ == '__main__':
+  print __doc__.strip()

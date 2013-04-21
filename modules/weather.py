@@ -14,6 +14,8 @@ from tools import deprecated
 r_from = re.compile(r'(?i)([+-]\d+):00 from')
 
 def location(name): 
+   if name == 'Rouq':
+      return 'Amsterdam', 'NL', 52.3740272046208, 4.88968849182129
    name = urllib.quote(name.encode('utf-8'))
    uri = 'http://ws.geonames.org/searchJSON?q=%s&maxRows=1' % name
    for i in xrange(10): 
@@ -280,7 +282,7 @@ def f_weather(self, origin, match, args):
       elif level == 5: 
          cover = 'Cloudy'
       elif level == 3: 
-         cover = 'Scattered'
+         cover = 'Partly cloudy'
       elif (level == 1) or (level == 0): 
          cover = u'Clear \u263C'.encode('utf-8')
       else: cover = 'Cover Unknown'
@@ -335,7 +337,8 @@ def f_weather(self, origin, match, args):
          'SH': 'Showers of', 
          'TS': 'Thundery', 
          'FZ': 'Freezing', 
-         'VC': 'In the vicinity:'
+         'VC': 'In the vicinity:',
+	 'RA': 'Light rain'
       }
 
       phenomena = {

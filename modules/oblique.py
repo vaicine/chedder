@@ -43,9 +43,7 @@ def service(phenny, input, command, args):
    lines = bytes.splitlines()
    if not lines: 
       return phenny.reply("Sorry, the service didn't respond any output.")
-   try: line = lines[0].encode('utf-8')[:350]
-   except: line = lines[0][:250]
-   phenny.say(line)
+   phenny.say(lines[0][:350])
 
 def refresh(phenny): 
    if hasattr(phenny.config, 'services'): 
@@ -60,7 +58,11 @@ def refresh(phenny):
 def o(phenny, input): 
    """Call a webservice."""
    text = input.group(2)
-
+   if input.group(1) == 'lastfm':
+      if input.group(2) is not None:
+         text = str(input.group(1)) + ' ' + str(input.group(2))
+      else:
+         text = input.group(1)
    if (not o.services) or (text == 'refresh'): 
       length, added = refresh(phenny)
       if text == 'refresh': 
@@ -99,6 +101,11 @@ o.commands = ['o']
 o.example = '.o servicename arg1 arg2 arg3'
 o.services = {}
 o.serviceURI = None
+
+
+def lastfm(phenny, input):
+   o(phenny, input)
+lastfm.commands = ['lastfm']
 
 def snippet(phenny, input): 
    if not o.services: 

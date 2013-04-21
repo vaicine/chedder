@@ -31,14 +31,19 @@ commands.commands = ['commands']
 commands.priority = 'low'
 
 def help(phenny, input): 
-   response = (
-      'Hi, I\'m a bot. Say ".commands" to me in private for a list ' + 
-      'of my commands, or see http://inamidst.com/phenny/ for more ' + 
-      'general details. My owner is %s.'
-   ) % phenny.config.owner
+   response =  'Herro, i am Chedder. im not a bot. i like talking about the following: http://j.mp/Olyo5E'
    phenny.reply(response)
 help.rule = ('$nick', r'(?i)help(?:[?!]+)?$')
+help.commands = ['help']
 help.priority = 'low'
+
+def morning(phenny, input):
+   response = 'Good morning!'
+   phenny.reply(response)
+morning.rule = ('$nick', r'(?i)morning(?:[?!]+)?$')
+morning.commands = ['morning']
+morning.priority = 'low'
+
 
 def stats(phenny, input): 
    """Show information on command usage patterns."""

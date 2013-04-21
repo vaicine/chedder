@@ -176,7 +176,6 @@ def f_title(self, origin, match, args):
       self.msg(origin.sender, origin.nick + ': ' + title)
    else: self.msg(origin.sender, origin.nick + ': No title found')
 f_title.commands = ['title']
-
 def noteuri(phenny, input): 
    uri = input.group(1).encode('utf-8')
    if not hasattr(phenny.bot, 'last_seen_uri'): 
