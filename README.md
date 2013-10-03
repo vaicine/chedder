@@ -1,7 +1,7 @@
 Chedder
 =======
 
-### The infamous #photoshop@irc.quakenet.org IRC bot. ###
+### The infamous #photoshop @ irc.quakenet.org IRC bot. ###
 
 ![Cheese](http://github.com/vaicine/chedder/raw/master/cheese.jpg)
 
