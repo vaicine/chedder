@@ -9,7 +9,7 @@ import random
 
 def hello(phenny, input): 
    greeting = random.choice(('Hi', 'Hey', 'Hello'))
-   punctuation = random.choice(('', '!'))
+   punctuation = random.choice(('', '!', '!!', '!!!!!!!111oneone'))
    phenny.say(greeting + ' ' + input.nick + punctuation)
 hello.rule = r'(?i)(hi|hello|hey) $nickname[ \t]*$'
 

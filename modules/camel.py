@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# camel.py - a camel roulette game for phenny
+# camel.py - a camel roulette game for chedder
 
 import random
 
@@ -43,7 +43,7 @@ def rrcamel(phenny, input):
   phenny.camel['run']=True
   strbul = str(bullets) + ((bullets == 1) and " bullet" or " bullets")
   strcha = str(chambers) + ((chambers == 1) and " chamber" or " chambers")
-  phenny.say("Allah akbar, jihad. I sell you very nice camel. Please, slap or stroke him, very nice.")
+  phenny.say("I sell you very nice camel. Please, slap or stroke him, very nice.")
 rrcamel.commands=["camel"]
 rrcamel.thread=False
 
